@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wing Run – a pixel bat game for Android</title>
+<meta name="description" content="Wing Run is a pixel art Android game. Guide a bat up and down to slip between the blocks.">
+<meta name="theme-color" content="#FFFFFF">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+
+<!-- AOS (animate on scroll) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+<!-- Tailwind CSS (Play CDN). For production, build Tailwind instead of using the CDN script. -->
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+        colors: {
+          navy: '#0F172A',
+          brand: '#2563EB',
+          flame: '#DC2626',
+          gold: '#FACC15',
+          mist: '#F3F6FF'
+        },
+        keyframes: {
+          flap: {
+            '0%, 100%': { transform: 'translateY(0)' },
+            '50%': { transform: 'translateY(-14px)' }
+          }
+        },
+        animation: { flap: 'flap 2.4s ease-in-out infinite' }
+      }
+    }
+  }
+</script>
+</head>
+
+<body class="bg-white font-sans text-navy antialiased">
+
+<!-- Header -->
+<header class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
+  <a href="#top" class="flex items-center gap-3 text-2xl font-black uppercase focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-brand">
+    <img src="images/wingrun-bat.png" alt="" class="h-auto w-[52px]" style="image-rendering:pixelated">
+    Wing Run
+  </a>
+  <nav class="flex flex-wrap items-center gap-6 text-[17px] font-medium" aria-label="Main">
+    <a href="#play" class="py-3 hover:text-brand">How to play</a>
+    <a href="#features" class="py-3 hover:text-brand">Features</a>
+    <a href="https://github.com/JosueEtta/wing-run" class="py-3 hover:text-brand">GitHub</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="relative mx-auto grid max-w-6xl items-center gap-14 px-6 pb-52 pt-10 lg:grid-cols-2">
+      <div class="flex flex-col gap-7">
+        <p class="text-[15px] font-bold uppercase tracking-[.12em] text-brand" data-aos="fade-up">A mobile game for Android</p>
+        <h1 class="text-5xl font-black uppercase leading-[1.02] sm:text-6xl" data-aos="fade-up" data-aos-delay="100">Fly up.<br>Dive down.<br>Dodge the blocks.</h1>
+        <p class="max-w-xl text-xl leading-relaxed text-slate-600" data-aos="fade-up" data-aos-delay="200">Wing Run is a pixel art game where you guide a bat up and down to slip between blocks. How far can you go?</p>
+        <div class="flex flex-wrap gap-4" data-aos="fade-up" data-aos-delay="300">
+          <a href="https://github.com/JosueEtta/wing-run" data-download class="inline-flex min-h-14 items-center gap-3 rounded-2xl border-4 border-navy px-7 py-4 text-lg font-black uppercase tracking-wide shadow-[0_5px_0_#0F172A] transition hover:translate-y-0.5 hover:shadow-[0_3px_0_#0F172A] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-brand bg-flame text-white"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>Download for Android</a>
+          <a href="https://github.com/JosueEtta/wing-run" class="inline-flex min-h-14 items-center gap-3 rounded-2xl border-4 border-navy px-7 py-4 text-lg font-black uppercase tracking-wide shadow-[0_5px_0_#0F172A] transition hover:translate-y-0.5 hover:shadow-[0_3px_0_#0F172A] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-brand bg-white text-navy">View on GitHub</a>
+        </div>
+        <p class="text-base text-slate-600" data-aos="fade-up" data-aos-delay="400">Available on Android only.</p>
+      </div>
+
+      <div class="min-w-0" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="900">
+        <div class="overflow-hidden rounded-[30px] border-[5px] border-navy bg-white shadow-[0_8px_0_#0F172A]">
+          <img src="images/wingrun-screen.png" alt="Wing Run start screen: a bat above a red Start Game button, surrounded by blue blocks" class="block h-auto w-full">
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative blocks, like the ones in the game -->
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-around" aria-hidden="true">
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand " style="height:70px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand hidden sm:block" style="height:40px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand " style="height:110px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand hidden md:block" style="height:56px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand hidden sm:block" style="height:90px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand " style="height:48px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand hidden md:block" style="height:120px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand hidden sm:block" style="height:64px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+      <div class="relative w-11 shrink-0 rounded-t-[10px] border-4 border-b-0 border-navy bg-brand " style="height:84px"><span class="absolute bottom-3 left-2 top-2 w-2 rounded bg-[#7FB0FF]"></span></div>
+    </div>
+  </section>
+
+  <!-- How to play -->
+  <section id="play" class="bg-mist px-6 py-24">
+    <div class="mx-auto flex max-w-6xl flex-col gap-10">
+      <h2 class="text-4xl font-black uppercase leading-tight sm:text-[40px]" data-aos="fade-up">How to play</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+      <article class="flex flex-col gap-3.5 rounded-[18px] border-[3px] border-navy bg-white p-7 shadow-[0_6px_0_#0F172A]" data-aos="fade-up" data-aos-delay="0">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-navy text-xl font-black bg-brand text-white" aria-hidden="true">1</div>
+        <h3 class="text-[22px] font-black uppercase text-navy">Fly up or down</h3>
+        <p class="text-[17px] leading-relaxed text-slate-600">Steer the bat up or down to line up with the next gap.</p>
+      </article>
+      <article class="flex flex-col gap-3.5 rounded-[18px] border-[3px] border-navy bg-white p-7 shadow-[0_6px_0_#0F172A]" data-aos="fade-up" data-aos-delay="120">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-navy text-xl font-black bg-brand text-white" aria-hidden="true">2</div>
+        <h3 class="text-[22px] font-black uppercase text-navy">Slip through</h3>
+        <p class="text-[17px] leading-relaxed text-slate-600">Blue blocks keep coming. One touch and the run is over.</p>
+      </article>
+      <article class="flex flex-col gap-3.5 rounded-[18px] border-[3px] border-navy bg-white p-7 shadow-[0_6px_0_#0F172A]" data-aos="fade-up" data-aos-delay="240">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-navy text-xl font-black bg-brand text-white" aria-hidden="true">3</div>
+        <h3 class="text-[22px] font-black uppercase text-navy">Beat your score</h3>
+        <p class="text-[17px] leading-relaxed text-slate-600">Every run counts. Come back and climb the leaderboard.</p>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="px-6 py-24">
+    <div class="mx-auto flex max-w-6xl flex-col gap-10">
+      <h2 class="text-4xl font-black uppercase leading-tight sm:text-[40px]" data-aos="fade-up">Made to replay</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <article class="flex flex-col gap-3.5 rounded-[18px] border-[3px] border-navy bg-white p-7 shadow-[0_6px_0_#0F172A]" data-aos="fade-up" data-aos-delay="0">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-navy text-xl font-black bg-brand text-white" aria-hidden="true">A</div>
+        <h3 class="text-[22px] font-black uppercase text-navy">Pixel art</h3>
+        <p class="text-[17px] leading-relaxed text-slate-600">A hand-drawn pixel bat in a bold blue and red look.</p>
+      </article>
+      <article class="flex flex-col gap-3.5 rounded-[18px] border-[3px] border-navy bg-white p-7 shadow-[0_6px_0_#0F172A]" data-aos="fade-up" data-aos-delay="120">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-navy text-xl font-black bg-brand text-white" aria-hidden="true">B</div>
+        <h3 class="text-[22px] font-black uppercase text-navy">Player profiles</h3>
+        <p class="text-[17px] leading-relaxed text-slate-600">Add a player and keep each person's scores apart.</p>
+      </article>
+      <article class="flex flex-col gap-3.5 rounded-[18px] border-[3px] border-navy bg-white p-7 shadow-[0_6px_0_#0F172A]" data-aos="fade-up" data-aos-delay="240">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-navy text-xl font-black bg-gold text-navy" aria-hidden="true">C</div>
+        <h3 class="text-[22px] font-black uppercase text-navy">Leaderboard</h3>
+        <p class="text-[17px] leading-relaxed text-slate-600">See who flew the farthest on your device.</p>
+      </article>
+      <article class="flex flex-col gap-3.5 rounded-[18px] border-[3px] border-navy bg-white p-7 shadow-[0_6px_0_#0F172A]" data-aos="fade-up" data-aos-delay="360">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-navy text-xl font-black bg-brand text-white" aria-hidden="true">D</div>
+        <h3 class="text-[22px] font-black uppercase text-navy">Scores saved locally</h3>
+        <p class="text-[17px] leading-relaxed text-slate-600">Results are stored on your phone with SQLite.</p>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section id="download" class="bg-mist px-6 py-24">
+    <div class="mx-auto flex max-w-3xl flex-col items-center gap-7 text-center">
+      <img src="images/wingrun-bat.png" alt="" class="h-auto w-36 motion-safe:animate-flap" style="image-rendering:pixelated" data-aos="zoom-in">
+      <h2 class="text-4xl font-black uppercase leading-tight sm:text-[40px]" data-aos="fade-up">Ready to take off?</h2>
+      <p class="text-[19px] leading-relaxed text-slate-600" data-aos="fade-up" data-aos-delay="100">Download Wing Run on your Android phone and start your first flight.</p>
+      <div data-aos="fade-up" data-aos-delay="200">
+        <a href="https://github.com/JosueEtta/wing-run" data-download class="inline-flex min-h-14 items-center gap-3 rounded-2xl border-4 border-navy px-7 py-4 text-lg font-black uppercase tracking-wide shadow-[0_5px_0_#0F172A] transition hover:translate-y-0.5 hover:shadow-[0_3px_0_#0F172A] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-brand bg-flame text-white"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>Download for Android</a>
+      </div>
+      <p class="text-base text-slate-600">Android only. Source code on <a href="https://github.com/JosueEtta/wing-run" class="font-bold text-brand underline">GitHub</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="mx-auto flex max-w-6xl flex-wrap justify-between gap-4 px-6 py-8 text-base text-slate-600">
+  <span>Wing Run</span>
+  <a href="https://github.com/JosueEtta/wing-run" class="hover:text-brand">github.com/JosueEtta/wing-run</a>
+</footer>
+
+<!-- AOS + page script -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  // 1) Put your APK link (or Play Store link) here. Every "Download for Android" button uses it.
+  const DOWNLOAD_URL = 'https://github.com/JosueEtta/wing-run';
+  document.querySelectorAll('[data-download]').forEach(function (a) {
+    a.href = DOWNLOAD_URL;
+  });
+
+  // 2) Scroll animations. Turned off for visitors who prefer reduced motion.
+  AOS.init({
+    duration: 700,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 60,
+    disable: function () {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+  });
+</script>
+</body>
+</html>
